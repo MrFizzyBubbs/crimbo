@@ -19,6 +19,7 @@ import {
   $familiars,
   $item,
   $phylum,
+  $slot,
   $stat,
   CrystalBall,
   get,
@@ -271,6 +272,14 @@ export function islandOutfit(
     } else if (getMonsters(island.location).some(({ phylum }) => phylum === $phylum`plant`)) {
       outfit.equip($item`tearaway pants`);
     }
+  }
+
+  // Free run on reg fights, but only if we wouldn't waffle away from them
+  if (args.freeruns && fight === "regular" && !(args.waffles && itemAmount($item`waffle`))) {
+    if (!outfit.haveEquipped($item`tearaway pants`) && have($item`Greatest American Pants`))
+      outfit.equip($item`Greatest American Pants`);
+    else if (!outfit.equips.has($slot`acc2`))
+      outfit.equip(ifHave("acc2", $item`navel ring of navel gazing`));
   }
 
   outfit.modifier = [`200 ${island.element} resistance 40 max`, "-100 combat -35 min", "-tie"];

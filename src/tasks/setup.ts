@@ -69,6 +69,12 @@ export const SETUP_QUEST: Quest<CrimboTask> = {
       sobriety: "either",
     },
     {
+      name: "Four-leaf potato sprout",
+      completed: () => have($effect`Luck of St. Patrick`) || !have($item`four-leaf potato sprout`),
+      do: () => use($item`four-leaf potato sprout`),
+      sobriety: "either",
+    },
+    {
       name: "Disco Nap",
       ready: () => have($skill`Disco Nap`) && have($skill`Adventurer of Leisure`),
       completed: () => poisons.every((e) => !have(e)),

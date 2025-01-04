@@ -37,7 +37,7 @@ function freeKillTask(
     do: () => getIsland().location,
     sobriety: "sober",
     outfit: () => islandOutfit("freekill", source),
-    combat: new CrimboStrategy(() => Macro.islandKillWith(action)),
+    combat: new CrimboStrategy(() => Macro.islandKillWith(getIsland(), action)),
     ...fragment,
   };
 }
@@ -52,7 +52,7 @@ function freeRunTask(
     do: () => getIsland().location,
     sobriety: "sober",
     outfit: () => islandOutfit("freerun", source),
-    combat: new CrimboStrategy(() => Macro.islandRunWith(action)),
+    combat: new CrimboStrategy(() => Macro.islandRunWith(getIsland(), action)),
     ...fragment,
   };
 }
@@ -231,7 +231,7 @@ export const ISLAND_QUEST: Quest<CrimboTask> = {
         name: "Island Adventuring",
         completed: () => myAdventures() === 0,
         do: () => getIsland().location,
-        combat: new CrimboStrategy(() => Macro.islandCombat()),
+        combat: new CrimboStrategy(() => Macro.islandCombat(getIsland())),
         outfit: () => islandOutfit("regular"),
         sobriety: "either",
       },
